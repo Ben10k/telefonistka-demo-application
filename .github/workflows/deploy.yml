@@ -21,14 +21,14 @@ jobs:
         GITHUB_OAUTH_TOKEN: ${{ steps.generate-token.outputs.token }}
         APPROVER_GITHUB_OAUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TEMPLATES_PATH: "/telefonistka/templates/"
-      run: >
-        /telefonistka/bin/telefonistka 
-          bump-yaml
-          --auto-merge
-          --triggering-actor "$GITHUB_ACTOR"
-          --triggering-repo "$GITHUB_REPOSITORY"
-          --triggering-repo-sha "$GITHUB_REF"
-          --target-repo "ben10k/telefonistka-demo-argo-live"
-          --target-file "_WORKSPACE/telefonistka-demo-application/values.yaml"
-          --address ".telefonistka-demo-argo-live.image.tag"
+      run: |
+        /telefonistka/bin/telefonistka \ 
+          bump-yaml \
+          --auto-merge \
+          --triggering-actor "$GITHUB_ACTOR" \
+          --triggering-repo "$GITHUB_REPOSITORY" \
+          --triggering-repo-sha "$GITHUB_REF" \
+          --target-repo "ben10k/telefonistka-demo-argo-live" \
+          --target-file "_WORKSPACE/telefonistka-demo-application/values.yaml" \
+          --address ".telefonistka-demo-argo-live.image.tag" \
           --replacement-string "$(basename $GITHUB_REF)"

@@ -17,6 +17,10 @@ jobs:
         app_id: ${{ secrets.APP_ID }}
         private_key: ${{ secrets.APP_PRIVATE_KEY }}
     - name: Telefonistka
+      env:
+        GITHUB_OAUTH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        APPROVER_GITHUB_OAUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TEMPLATES_PATH: "/telefonistka/templates/"
       run: >
         /telefonistka/bin/telefonistka 
           bump-yaml
@@ -28,7 +32,3 @@ jobs:
           --target-file "_WORKSPACE/telefonistka-demo-application/values.yaml"
           --address ".telefonistka-demo-argo-live.image.tag"
           --replacement-string "$(basename $GITHUB_REF)"
-    env:
-      GITHUB_OAUTH_TOKEN: ${{ steps.generate-token.outputs.token }}
-      APPROVER_GITHUB_OAUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      TEMPLATES_PATH: "/telefonistka/templates/"

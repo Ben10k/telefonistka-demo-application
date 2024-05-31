@@ -1,5 +1,4 @@
 name: Deploy
-# Controls when the workflow will run "closed" is used for prmoting changes, "opened"/"synchronize" are needed to warn on drift.
 on:
   release:
     types:
